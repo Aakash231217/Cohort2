@@ -22,3 +22,12 @@ export const evenSelector = selector({
 
 //Todo creation application with filtering logic
 //todos,filter
+
+export const filterTodos = selector({
+    key:"filteredTodos",
+    get:(props)=>{
+        const todos = props.get(todoAtom);
+        const filter = props.get(filterAtom);
+        return todos.filter(x=>x.title.includes(filter) || x.description.includes("filter"));
+    }
+})
