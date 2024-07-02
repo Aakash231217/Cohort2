@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { useMemo } from 'react'
+import useRef from 
 function App() {
   const [exchange1Data, setExchange1Data] = useState({});
   const [exchange2data,setExchange2Data] = useState({});
@@ -34,6 +35,7 @@ function App() {
   return (
     <>
      <CryptoGainsCalculator calculateCrypto={calculateCrypto}/>
+     <useRef/>
     </>
   )
 }
