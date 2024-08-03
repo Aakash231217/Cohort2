@@ -1,21 +1,49 @@
 import React from 'react'
+import axios from 'axios';
 import './App.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-function App() {
-  const[render,setRender] = useState(true);
+function useTodos(n){
+  const[todos,setTodos] = useState([]);
+  const [loading,setLoading] = useState(true);
   useEffect(()=>{
-    setTimeout(()=>{
-      setRender(false)
-    },10000)
-  },[])
+    setInterval(()=>{
+      axios.get("https://sum-server.100xdevs.com/todos").then(res=>{
+        setTodos(res.data.todos);
+        setLoading(false);
+      })
+    },n*1000)
+    axios.get("https://sum-server.100xdevs.com/todos").then(res=>{
+      setTodos(res.data.todos);
+      setLoading(false);
+    })
+    return ()=>{
+      clearInterval(value)
+    }
+  },[n])
+  return {todos,loading};
+}
 
+function App() {
+ 
+  const {todos,loading} = useTodos(5);
+  if(loading){
+    return <div>Loading.....</div>
+  }
   return (
     <>
-   {render?<Component/>:<div></div>}
+   {todos.map(todo=><Track todo={todo}/>)}
     </>
   )
+}
+
+function Track({todo}){
+  return <div>
+    {todo.title}
+    <br/>
+    {todo.description}
+  </div>
 }
 
 class MyComponent extends React.Component{
