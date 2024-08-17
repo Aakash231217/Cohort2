@@ -96,3 +96,50 @@ function maxValue(arr:number[]){
     return max;
 }
 console.log(maxValue([1,2,3,45,3]));
+
+
+type keyInput = "up"|"down"|"left"|"right";
+
+enum Direction{
+    Up="Up",
+    Down="Down",
+    Left="Left",
+    Right="Right",
+}
+//
+function doSomething(keyPressed:Direction){
+    if(keyPressed==Direction.Up){
+
+    }
+}
+doSomething(Direction.Up);
+doSomething(Direction.Down);
+console.log(Direction.Up);
+console.log(Direction.Down);
+doSomething(Direction.Left);
+doSomething(Direction.Right);
+
+
+const app = express();
+enum ResponseStatus{
+    Success=200,
+    NotFound = 404,
+    Error = 500
+}
+
+app.get("/",(req,res)=>{
+    if(!req.query.userId){
+        res.status(ResponseStatus.NotFound);
+    }
+    res.json({});
+})
+
+
+//generics
+ type Input = number | string;
+
+ function firstEle(arr:string[]|number[]){
+    return arr[0];
+ }
+
+ const value = firstEle([1,13,4,45,3])
